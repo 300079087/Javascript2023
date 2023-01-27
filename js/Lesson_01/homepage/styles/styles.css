@@ -1,0 +1,10 @@
+body {
+    color: black;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: beige;
+}
+#wrapper {
+    background-color: bisque;
+    position: relative;
+    left: 200px;
+}
