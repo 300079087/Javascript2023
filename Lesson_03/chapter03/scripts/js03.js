@@ -15,6 +15,7 @@
 
      //Watching for when the window loads.
      window.addEventListener("load", addWeekDays);
+     
 
      //Creating a function and while loop in order to add the array data into the days of the week on the screen.
      function addWeekDays()
@@ -56,8 +57,6 @@
                     break;
             }
 
-            gameInfo += "<p>";
-
             if (gameLocations[i] === "h")
             {
                 gameInfo += "vs. ";
@@ -84,8 +83,6 @@
             {
                 gameInfo += " [" + gameInnings[i] + "]";
             }
-
-            gameInfo += "<p>";
             
             let tableCell = document.getElementById(gameDates[i]);
             tableCell.insertAdjacentHTML("beforeEnd", gameInfo);
