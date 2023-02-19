@@ -56,43 +56,43 @@ function runTheRegister()
 // Function to calculate the change by each unit of currency
 function calcChange(changeValue) {
    // Determine the number of $20 bills
-   let bill20Amt = determineCoin(changeValue, 20);
+   let bill20Amt = determineCoin(changeValue, 2000);
    document.getElementById("bill20").innerHTML = bill20Amt;
-   changeValue -=  bill20Amt*20;
+   changeValue -=  bill20Amt*2000;
 
    // Determine the number of $10 bills   
-   let bill10Amt = determineCoin(changeValue, 10);
+   let bill10Amt = determineCoin(changeValue, 1000);
    document.getElementById("bill10").innerHTML = bill10Amt;
-   changeValue -=  bill10Amt*10;
+   changeValue -=  bill10Amt*1000;
    
    // Determine the number of $5 bills
-   let bill5Amt = determineCoin(changeValue, 5);
+   let bill5Amt = determineCoin(changeValue, 500);
    document.getElementById("bill5").innerHTML = bill5Amt;
-   changeValue -=  bill5Amt*5;  
+   changeValue -=  bill5Amt*500;  
    
    // Determine the number of $1 bills
-   let bill1Amt = determineCoin(changeValue, 1);
+   let bill1Amt = determineCoin(changeValue, 100);
    document.getElementById("bill1").innerHTML = bill1Amt;
-   changeValue -=  bill1Amt*1;  
+   changeValue -=  bill1Amt*100;  
    
    // Determine the number of quarters
-   let coin25Amt = determineCoin(changeValue*100, 25);
+   let coin25Amt = determineCoin(changeValue, 25);
    document.getElementById("coin25").innerHTML = coin25Amt;
-   changeValue -= coin25Amt*0.25;   
+   changeValue -= coin25Amt*25;   
    
    // Determine the number of dimes
-   let coin10Amt = determineCoin(changeValue*100, 10);
+   let coin10Amt = determineCoin(changeValue, 10);
    document.getElementById("coin10").innerHTML = coin10Amt;
-   changeValue -= coin10Amt*0.10; 
+   changeValue -= coin10Amt*10; 
    
    // Determine the number of nickels
-   let coin5Amt = determineCoin(changeValue*100, 05);
+   let coin5Amt = determineCoin(changeValue, 5);
    document.getElementById("coin5").innerHTML = coin5Amt;
-   changeValue -= coin5Amt*0.05;  
+   changeValue -= coin5Amt*5;  
    
    // Determine the number of pennies
    // The Math.round() method rounds the value to the nearest integer
-   let coin1Amt = Math.round(changeValue*100);
+   let coin1Amt = Math.round(changeValue);
    document.getElementById("coin1").innerHTML = coin1Amt;
 }
 
