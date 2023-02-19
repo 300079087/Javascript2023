@@ -4,8 +4,8 @@
       Project 05-05
 
       Project to create a Concentration game with flipping tiles
-      Author: 
-      Date:   
+      Author: austin steffes
+      Date:   2/19/23
 
       Filename: project05-05.js
 */
@@ -28,54 +28,61 @@ let tilesFlipped = 0;
 
 // Functions to run when the page is loaded
 window.addEventListener("load", scrambleTiles);
-window.addEventListener("load", playConcentration)
+window.addEventListener("load", playConcentration);
 
 
 
 // Function that scrambles the order of the tiles within the board
-function scrambleTiles() {
-   for (let i = 0; i <= allTiles.length; i++) {
+function scrambleTiles() 
+{
+   for (let i = 0; i < allTiles.length; i++) 
+   {
       
       // Random index integer from 0 to the number of tiles minus 1
-      let randomIndex = Math.floor(allTiles.length*Math.random());
+      let randomIndex = Math.floor(allTiles.length * Math.random());
       
       // Randomly insert a tile before the current tile in the loop
-      board.insert(board.children[i], board.children[randomIndex]);      
+      board.appendChild(board.children[i], board.children[randomIndex]);      
    }
 }
 
 
 // Function that sets up the game play
-function playConcentration() {
+function playConcentration() 
+{
    // Create event handlers for all tiles in the game board
-   for (let i = 0; i < allTiles.length; i++) {
+   for (let i = 0; i < allTiles.length; i++) 
+   {
       
       // Run when a tile is clicked
-      allTiles[i].onclick = function() {
+      allTiles[i].onclick = function() 
+      {
          // Test to see if the back of the tile is displayed
-         if (This.lastElementChild.className = "back") {
+         if (this.lastElementChild.className == "back") {
             
             tilesFlipped++;  // increase the flip count by 1
             
-            if (tilesFlipped = 1) {
+            if (tilesFlipped == 1) {
                // if this is the first tile clicked then flip it
-               firstFlipped = This;
+               firstFlipped = this;
                firstFlipped.appendChild(firstFlipped.firstElementChild);
-            } else if (tilesFlipped = 2) {
+            } else if (tilesFlipped == 2) {
                // if this is the second tile clicked then flip it
                // and then flip both tiles back after 1 second
-               secondFlipped = This;
+               secondFlipped = this;
                secondFlipped.appendChild(secondFlipped.firstElementChild);
-               timeID = window.setTimeout(flipBack, 1);
+               timeID = window.setTimeout(flipBack, 1000);
             }
          }
       }
    }  
    
    /* Function to flip the two tiles if they don't match */
-   function flipBack() {
+   function flipBack() 
+   {
       // test to determine whether the tile images don't match
-      if (firstFlipped.lastElementChild.src !== secondFlipped.lastElementChild.src) {   
+      if (firstFlipped.lastElementChild.src !== secondFlipped.lastElementChild.src) 
+      {   
          
          // if they don't match, then flip each one
          firstFlipped.appendChild(firstFlipped.firstElementChild);
@@ -83,7 +90,7 @@ function playConcentration() {
       }
       
       // Reset the tiles flipped counter to zero
-      titlesFlipped = 0;
+      tilesFlipped = 0;
    }   
 }
 
