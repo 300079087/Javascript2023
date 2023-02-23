@@ -50,7 +50,7 @@ window.addEventListener("load", function(){
             orderForm.elements.salesTax.value = salesTax.toLocaleString("en-US", {style: "currency", currency: "USD"});
 
             let totalCost = subtotal + salesTax;
-            orderForm.elements.totalcost.value = totalCost.toLocaleString("en-US", {style: "currency", currency: "USD"});
+            orderForm.elements.totalCost.value = totalCost.toLocaleString("en-US", {style: "currency", currency: "USD"});
 
             orderForm.elements.modelName.value = model.options[mIndex].text;
             let selectedPlan = document.querySelector('input[name="plan"]:checked');
