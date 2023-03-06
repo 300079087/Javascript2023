@@ -13,15 +13,94 @@
 document.getElementById("getFile").onchange = function()
 {
       let userFile = this.files[0];
-
-      let fr = new FileReader();
-      fr.readAsText(userFile);
-
-      let sourceDoc = document.getElementById("wc_document");
-      fr.onload = function()
+            
+      try
       {
-            sourceDoc.innerHTML = fr.result;
+            let isText = userFile.type.startsWith("text");
+            if (!isText)
+            {
+                  throw userFile.name + " is not a text file";
+            }
+
+            let fr = new FileReader();
+            fr.readAsText(userFile);
+
+            let sourceDoc = document.getElementById("wc_document");
+            fr.onload = function()
+            {
+                  sourceDoc.innerHTML = fr.result;
+
+                  let sourceText = sourceDoc.textContent;
+
+                  worldCloud(sourceText);
+            }
+
       }
+      catch(err)
+      {
+            window.alert(err);
+      }
+
+      function worldCloud(sourceText)
+      {
+            sourceText = sourceText.toLowerCase();
+            sourceText = sourcetext.trim();
+
+            let alphaRegx = /[^a-zA-Z/s]/g;
+            sourceText = sourceText.replace(alphaRegx, "");
+
+            for (let i = 0; i < stopWords.length; i++)
+            {
+                  let stopRegx = new RegExp("\\b"+stopWords[i]+"\\b", "g");
+                  sourceText = sourceText.replace(stopRegx, "");
+            }
+
+            console.log(sourceText);
+
+            words.sort();
+
+            let unique = [ [words[0], 1]];
+            let uniqueIndex = 0;
+
+            for (let i = 1; i < words.length; i++)
+            {
+                  if (words[i] === words[i-1])
+                  {
+                        unique[uniqueIndex[1]++]
+                  }
+                  else
+                  {
+                        uniqueIndex++;
+                        unique[uniqueIndex] = [words[i], 1];
+                  }
+            }
+
+            unique.sort(byDuplicate);
+
+            function byDuplicate(a,b)
+            {
+                  return b[1] - a[1]; 
+            }
+
+            unique = unique.slice(0,100); 
+
+            let maxCount = unique[0][1];
+
+            unique.sort(); 
+
+            let cloudBox = document.getElementById("wc_cloud");
+            cloudBox.innerHTML = "";
+
+            for (let i = 0; i < unique.length; i++)
+            {
+                  let word = document.createElement("span");
+                  word.textContent = unique [i][0];
+                  word.style.fontSize = unique [i][1]/maxCount + "em";
+                  cloudBox.appendChild(word);
+            }
+
+      }
+
 };
 
 
