@@ -44,7 +44,7 @@ document.getElementById("getFile").onchange = function()
       function worldCloud(sourceText)
       {
             sourceText = sourceText.toLowerCase();
-            sourceText = sourcetext.trim();
+            sourceText = sourceText.trim();
 
             let alphaRegx = /[^a-zA-Z/s]/g;
             sourceText = sourceText.replace(alphaRegx, "");

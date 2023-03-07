@@ -4,12 +4,11 @@
       Project 07-04
 
       Project to create a customer queue
-      Author: 
-      Date:   
+      Author: austin steffes
+      Date:   3/7/23
 
       Filename: project07-04.js
 */
-
 let customers = ["Alisha Jordan","Kurt Cunningham", "Ricardo Lopez", "Chanda Rao",
                  "Kevin Grant", "Thomas Bey", "Elizabeth Anderson", "Shirley Falk",
                  "David Babin", "Arthur Blanding", "Brian Vick", "Jaime Aguilar",
@@ -40,3 +39,43 @@ function generateCustomerList() {
    }
 }
 
+
+addButton.onclick = addCustomer;
+searchButton.onclick = searchCustomer;
+removeButton.onclick = removeCustomer;
+topButton.onclick = removeTopCustomer;
+
+function addCustomer() {
+   customers.push(customerName.value);
+   generateCustomerList();
+   status.textContent = `${customerName.value} added to the end of the queue`;
+}
+
+function removeCustomer() {
+   let custIndex = customers.indexOf(customerName.value);
+   
+   if (custIndex + 1) {
+       customers.splice(custIndex, 1);
+       generateCustomerList();
+       status.textContent = `${customerName.value} removed from queue`
+   } else {
+       status.textContent = `${customerName.value} not found in queue`;
+   }
+}
+
+function searchCustomer() {
+   let custIndex = customers.indexOf(customerName.value) + 1;
+
+   if (custIndex) {
+       status.textContent = `${customerName.value} found in position ${custIndex} of the queue`;
+   } else {
+       status.textContent = `${customerName.value} not found in queue`;
+   }
+
+}
+
+function removeTopCustomer() {
+   let custName = customers.shift();
+   generateCustomerList();
+   status.textContent = `${custName} removed from top of queue`;
+}
