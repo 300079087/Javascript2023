@@ -12,6 +12,12 @@
 let subButton = document.getElementById("subButton");
 
 subButton.addEventListener("click", validateName);
+subButton.addEventListener("click", validateCard);
+subButton.addEventListener("click", validateNumber);
+subButton.addEventListener("click", validateMonth);
+subButton.addEventListener("click", validateYear);
+subButton.addEventListener("click", validateCVC);
+
 
 
 function validateName()
@@ -110,17 +116,6 @@ function validateCVC()
       cvc.setCustomValidity("");
    }
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
