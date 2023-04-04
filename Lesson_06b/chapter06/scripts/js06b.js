@@ -95,7 +95,7 @@ function validateYear()
 
 function validateCVC()
 {
-   let card = document.querySelector('input[name="credit"]:checked').value;
+   let card = document.querySelector("input[name='credit']:checked").value;
    let cvc = document.getElementById("cvc");
 
    //validate the CVC value
@@ -107,7 +107,7 @@ function validateCVC()
    {
       cvc.setCustomValidity("Enter a 4-digit number");
    }
-   else if ((card === "amex") && !(/^\d{3}$/.test(cvc.value)))
+   else if ((card !== "amex") && !(/^\d{3}$/.test(cvc.value)))
    {
       cvc.setCustomValidity("Enter a 3-digit number");
    }
