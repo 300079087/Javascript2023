@@ -10,34 +10,39 @@
       Filename:       js08.js
  */
 
-window.addEventListener("load", playDrawPoker);
+   window.addEventListener("load", playDrawPoker);
 
-function playDrawPoker() {
-   // Reference buttons and images within the Poker Game page
-   let dealButton = document.getElementById("dealB");
-   let drawButton = document.getElementById("drawB");
-   let standButton = document.getElementById("standB");
-   let resetButton = document.getElementById("resetB");
-   let statusBox = document.getElementById("status");
-   let betSelection = document.getElementById("bet");
-   let bankBox = document.getElementById("bank");
-   let cardImages = document.querySelectorAll("img.cardImg");
-    
-   pokerGame.currentBank = 500;
-   pokergame.currentBet = 25;
+   function playDrawPoker() {
+      // Reference buttons and images within the Poker Game page
+      let dealButton = document.getElementById("dealB");
+      let drawButton = document.getElementById("drawB");
+      let standButton = document.getElementById("standB");
+      let resetButton = document.getElementById("resetB");
+      let statusBox = document.getElementById("status");
+      let betSelection = document.getElementById("bet");
+      let bankBox = document.getElementById("bank");
+      let cardImages = document.querySelectorAll("img.cardImg");
 
-   let myDeck = new PokerDeck();
-   myDeck.shuffle();
+      // Set the initial bank and bet values
+      pokerGame.currentBank = 500;
+      pokerGame.currentBet = 25;
 
-   let myHand = new pokerHand(5);
+      // Create a deck of shuffled cards
+      let myDeck = new PokerDeck();
+      myDeck.shuffle();
 
-   bankBox.value = pokergame.currentBank;
-   betsSelection.onchange = function()
+      let myHand = new PokerHand(5);
+
+      // Display the current bank value
+      bankBox.value = pokerGame.currentBank;
+
+      // Change the bet when the selection changes
+      betSelection.onchange = function() {
+         pokerGame.currentBet = parseInt(this.value);
+      }
+
+   dealButton.addEventListener("click", function() 
    {
-      pokerGame.currentBet = parseInt(this.value);
-   }
-   
-      dealButton.addEventListener("click", function() {
       if (pokerGame.currentBank >= pokerGame.currentBet) {
          // Enable the Draw and Stand buttons after the initial deal
          dealButton.disabled = true;        // Turn off the Deal button
@@ -45,28 +50,40 @@ function playDrawPoker() {
          drawButton.disabled = false;       // Turn on the Draw button
          standButton.disabled = false;      // Turn on the Stand Button
          statusBox.textContent = "";        // Erase any status messages
-         
+
+         // Reduce the bank by the size of the bet
          bankBox.value = pokerGame.placeBet();
 
-         if (myDeck.cards.length < 10) 
-         {
+         // Get a new deck if there are less than 10 cards left
+         if (myDeck.cards.length < 10) {
             myDeck = new PokerDeck();
             myDeck.shuffle();
          }
-      
-         myDeck.dealTo(myHand);
-
-         for (let i = 0; i < cardImages.length; i++)
+         // Deal 5 cards from the deck to the hand
+         myDeck.deal(myHand);
+         
+         // Display the card images on the table
+         for (let i = 0; i < cardImages.length; i++) 
          {
             cardImages[i].src = myHand.cards[i].cardImage();
+            // Flip the card images when clicked
+            cardImages[i].onclick = function() 
+            {
+               if (this.src.includes("cardback.png")) {
+                  // Show the front of the card
+                  this.src = myHand.cards[i].cardImage();
+               } else {
+                  // Show the back of the card
+                  this.src = "images/cardback.png";
+               }
+            }
          }
 
-      }  else
-         {
-            statusBox.textContent = "Insufficient Funds";
-         }
+
+      } else {
+         statusBox.textContent = "Insufficient Fund";
+      }
    });
-   
    
    drawButton.addEventListener("click", function() {
       // Enable the Deal and Bet options when the player chooses to draw new cards
@@ -75,8 +92,24 @@ function playDrawPoker() {
       drawButton.disabled = true;         // Turn off the Draw button
       standButton.disabled = true;        // Turn off the Stand Button
       
+      // Replace cards marked to be discarded
+      for (let i = 0; i < cardImages.length; i++) {
+         if (cardImages[i].src.includes("images/cardback.png")) 
+         {
+            // Replace the card and its image on the table
+           this.src = myHand.cards[i].cardImage();
+         }
+         else
+         {
+            this.src = "images/cardback.png";
+         }
+      }
 
+      // Evaluate the hand drawn by user
+      statusBox.textContent = myHand.getHandValue();
 
+      // Update the bank value
+      bankBox.value = pokerGame.payBet(statusBox.textContent);
    });
    
     
@@ -87,7 +120,11 @@ function playDrawPoker() {
       drawButton.disabled = true;         // Turn off the Draw button
       standButton.disabled = true;        // Turn off the Stand Button  
 
-    
+      // Evaluate the hand drawn by user
+      statusBox.textContent = myHand.getHandValue();
+
+      // Update the bank value
+      bankBox.value = pokerGame.payBet(statusBox.textContent);
    });
    
    
