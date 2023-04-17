@@ -18,7 +18,7 @@ for (let item of keys)
       let newRow = document.createElement("tr");
 
       //display storage key
-      let keyCell = docuemnt.createElement("td");
+      let keyCell = document.createElement("td");
       keyCell.textContent = item;
       newRow.appendChild(keyCell);
 
