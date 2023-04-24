@@ -54,5 +54,6 @@ document.getElementById("signupBtn").onclick = function()
       }
 
       console.log(localStorage);
+      location.href = "./js09c.html";
 
 }
