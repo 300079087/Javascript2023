@@ -30,6 +30,7 @@ getFileButton.onchange = function() {
    }
    
 };
+
 function makeStaffTable(staff)
 {
    let staffTable = document.createElement("table");
@@ -46,13 +47,16 @@ function makeStaffTable(staff)
 
 // Add the header row to the table
 staffTable.appendChild(headerRow);
+
 for (let i in staff.directory)
 {
    let tableRow = document.createElement("tr");
-   for (let j in member)
+   let directory = staff.directory[i];
+   
+   for (let j in directory)
    {
       let tableCell = document.createElement("td");
-      tableCell.textContent = member[j];
+      tableCell.textContent = directory[j];
       tableRow.appendChild(tableCell);
    }
    staffTable.appendChild(tableRow);
@@ -61,3 +65,4 @@ for (let i in staff.directory)
 // Add the table to the container
 containerBox.appendChild(staffTable);
 }
+

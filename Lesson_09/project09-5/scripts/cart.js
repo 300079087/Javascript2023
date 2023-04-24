@@ -33,7 +33,7 @@ function displayCart() {
          
          // Retrieve information about a product added to the cart
          if (!sessionStorage.getItem("cartItem" + i)) continue;
-         let productArr = sessionStorage.getItem("cartItem" + i).split(" & ");
+         let productArr = sessionStorage.getItem("cartItem" + i).split("&");
          let newRow = document.createElement("tr");
          
          // Display the name of the product

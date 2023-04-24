@@ -20,7 +20,7 @@ window.addEventListener("puzzleSolved", updateRecord);
 // Event listener that is run when the page loads
 window.addEventListener("load", function() {
 
-      if (readCookie() !== 'undefined')
+      if (document.cookie)
       {
             bestText.textContent = getBestTime() + ' seconds';
       }
@@ -30,7 +30,7 @@ window.addEventListener("load", function() {
 
 function getBestTime()
 {
-      if (readCookie() !== 'undefined')
+      if (document.cookie)
       {
             let cookieArray = document.cookie.split('=');
             return parseInt(cookieArray[1]);
@@ -48,7 +48,7 @@ function updateRecord()
       let solutionTime = parseInt(clockTimer.value);
       let bestTime = getBestTime();
 
-      if (solutionTime < bestText)
+      if (solutionTime < bestTime)
       {
             bestTime = solutionTime;
             bestText.textContent = `${bestTime} seconds`;
@@ -60,17 +60,18 @@ function updateRecord()
 
 function storeBestTimeCookie(bestTime) {
       
-      writeCookie(cookieKey, bestTime, 90*24*60*60);
+      writeCookie("besttime", bestTime, 90*24*60*60);
   }
   
 
 
 //copy functions from chapter program
-function writeCookie(name,value,expDate,path,domain,secure)
+function writeCookie(name,value,age,expDate,path,domain,secure)
 {
       if (name && value)
       {
             let cStr = name + "=" + encodeURIComponent(value);
+            if (age) cStr += ";max-age=" + age;
             if (expDate) cStr += ";expires=" + expDate.toUTCString();
             if (path) cStr += ";path=" + path;
             if (domain) cStr += ";domain=" + domain;
