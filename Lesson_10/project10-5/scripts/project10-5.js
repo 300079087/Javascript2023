@@ -2,24 +2,21 @@
 /*  JavaScript 7th Edition
     Chapter 10
     Project 10-05
-
     Crossword Puzzle Code for Keyboard Actions
     
-    Author: 
-    Date:   
-
+    Author: Austin Steffes
+    Date:   4/24/23
     Filename: project10-05.js
-
 */
 
 
 // Event handler to for keydown events within the current document
-document.onkeypress = selectLetter;
+document.onkeydown = selectLetter;
 
 // Function to apply keyboard actions to select a letter or navigate the puzzle
 function selectLetter(e) {
    
-   event.preventDefault();
+   e.preventDefault();
    
    // Reference the letter to the left of the current letter
    let leftLetter = document.getElementById(currentLetter.dataset.left);
@@ -34,7 +31,7 @@ function selectLetter(e) {
    let downLetter = document.getElementById(currentLetter.dataset.down); 
    
    // Get the key typed by the player
-   let userKey = e.code;
+   let userKey = e.key;
  
    if (userKey === "ArrowLeft") { // Move left 
       formatPuzzle(leftLetter);  
@@ -51,11 +48,11 @@ function selectLetter(e) {
    } else if (userKey === "Backspace" || userKey === "Delete") { // Delete the character
       currentLetter.textContent = ""; 
       
-   } else if (userKey === "Space") { // Toggle the typing direction
+   } else if (userKey === " ") { // Toggle the typing direction
       switchTypeDirection();  
       
    } else if (userKey >= "a" && userKey <= "z") { // Write the character
-      currentLetter.textContent = userKey; 
+      currentLetter.textContent = userKey.toUpperCase(); 
       
       if (typeDirection === "right") {
          formatPuzzle(rightLetter);  // Move right after typing the letter
@@ -65,4 +62,3 @@ function selectLetter(e) {
    }
 
 }
-
