@@ -62,7 +62,7 @@ function readCookie()
       {
             let cookieList = document.cookie.split("; ");
 
-            for (items of cookieList)
+            for (let items of cookieList)
             {
                   let cookie = items.split("=");
                   let name = cookie[0];

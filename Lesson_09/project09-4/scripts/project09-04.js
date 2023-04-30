@@ -30,10 +30,12 @@ window.addEventListener("load", function() {
 
 function getBestTime()
 {
-      if (document.cookie)
+      let cookieFields = readCookie();
+      let bestTime = cookieFields["BestTime"];
+
+      if (bestTime)
       {
-            let cookieArray = document.cookie.split('=');
-            return parseInt(cookieArray[1]);
+            return bestTime;
       }
       else
       {
@@ -58,10 +60,10 @@ function updateRecord()
       }
 }
 
-function storeBestTimeCookie(bestTime) {
-      
-      writeCookie("besttime", bestTime, 90*24*60*60);
-  }
+function storeBestTimeCookie(bestTime) 
+{   
+      writeCookie("BestTime", bestTime, 90*24*60*60);
+}
   
 
 
@@ -88,7 +90,7 @@ function readCookie()
       {
             let cookieList = document.cookie.split("; ");
 
-            for (items of cookieList)
+            for (let items of cookieList)
             {
                   let cookie = items.split("=");
                   let name = cookie[0];
