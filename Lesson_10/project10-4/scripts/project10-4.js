@@ -21,9 +21,12 @@ let blackBox = document.getElementById("blackBox");
 //loop iterates through all contents pieces collection
 for (let i = 0; i < pieces.length; i++)
 {
-    pieces.draggable = true;
+    //make the chess pieces draggable
+    pieces[i].setAttribute("draggable", "true");
+
     //Create an event handler for the dragstart event that sets the text of event target’s id in the dataTransfer object.
-    pieces[i].addEventListener("dragstart", function(e){
+    pieces[i].addEventListener("dragstart", function(e)
+    {
         e.dataTransfer.setData("text", e.target.id);
     });
 }
@@ -58,8 +61,11 @@ for (let i = 0; i < boardSquares.length; i++)
             {
                 whiteBox.appendChild(occupyingPiece);
             }
-
-            blackBox.appendChild(occupyingPiece);
+            else
+            {
+                blackBox.appendChild(occupyingPiece);
+            }
         }
     });
 }
+

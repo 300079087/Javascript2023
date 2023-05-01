@@ -136,11 +136,11 @@ function switchTypeDirection() {
    var typeImage = document.getElementById("directionImg");
    if (typeDirection === "right") {
       typeDirection = "down";
-      typeImage.src = "pc_down.png";
+      typeImage.src = "images/pc_down.png";
       currentLetter.style.backgroundColor = "rgb(255, 191, 191)";
    } else {
       typeDirection = "right";
-      typeImage.src = "pc_right.png";
+      typeImage.src = "images/pc_right.png";
       currentLetter.style.backgroundColor = "rgb(191, 191, 255)";
    }   
 }
