@@ -32,15 +32,18 @@ function getBestTime()
 {
       let cookieFields = readCookie();
       let bestTime = cookieFields["BestTime"];
+      console.log(bestTime);
 
       if (bestTime)
       {
             return bestTime;
+            console.log(bestTime);
       }
       else
       {
             return 9999;
       }
+      console.log(bestTime);
 }
 
 //updateRecord() function
@@ -49,6 +52,8 @@ function updateRecord()
 {
       let solutionTime = parseInt(clockTimer.value);
       let bestTime = getBestTime();
+      console.log(bestTime);
+      console.log(solutionTime);
 
       if (solutionTime < bestTime)
       {
@@ -56,6 +61,8 @@ function updateRecord()
             bestText.textContent = `${bestTime} seconds`;
 
             storeBestTimeCookie(bestTime);
+            console.log(bestTime);
+            console.log(solutionTime);
 
       }
 }
@@ -63,6 +70,7 @@ function updateRecord()
 function storeBestTimeCookie(bestTime) 
 {   
       writeCookie("BestTime", bestTime, 90*24*60*60);
+      console.log(writeCookie);
 }
   
 
